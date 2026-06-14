@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700;900&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #D90429;
+  --color-canvas: #EAE7DC;
+  --color-ink: #000000;
+  
+  --font-headline: "Public Sans", sans-serif;
+  --font-display: "Public Sans", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Public Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --radius-none: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-full: 0px;
+}
+
+/* Brutalist CSS utilities & layout overrides */
+@layer utilities {
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+  }
+
+  .brutalist-shadow {
+    box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+  }
+
+  .brutalist-shadow-sm {
+    box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+  }
+
+  .brutalist-shadow-active {
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .brutalist-shadow-active:active {
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,1) !important;
+    transform: translate(4px, 4px) !important;
+  }
+
+  .brutalist-shadow-lg-active {
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .brutalist-shadow-lg-active:active {
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,1) !important;
+    transform: translate(8px, 8px) !important;
+  }
+
+  .scanline {
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    animation: scanline 8s linear infinite;
+  }
+}
+
+@keyframes scanline {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* Custom scrollbar for terminal vibes */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #EAE7DC;
+}
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border: 2px solid #EAE7DC;
+}
+
+/* Global body cursor & selection colors */
+html, body {
+  cursor: crosshair !important;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+/* Overwrite MUI default border radiuses inside the app */
+.MuiPaper-root, .MuiButton-root, .MuiInputBase-root, .MuiOutlinedInput-notchedOutline {
+  border-radius: 0px !important;
+}

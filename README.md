@@ -6,6 +6,45 @@ This workspace consists of two separate, decoupled applications:
 1. **`backend/`**: A RESTful API built on Express and MongoDB with JWT authentication.
 2. **`frontend/`**: A brutalist-aesthetic analytics interface built on React, Redux Toolkit, and Vite.
 
+## 🗺️ System Architecture & Data Flow
+
+```mermaid
+graph TD
+    subgraph Client ["Client Side (Frontend)"]
+        Browser["User Browser"]
+        React["React UI Components"]
+        Redux["Redux Toolkit (State Management)"]
+        Axios["Axios Services (HTTP API Client)"]
+    end
+
+    subgraph Server ["Server Side (Backend)"]
+        Express["Express Router (/api/v1/*)"]
+        Middlewares["Middlewares (Auth, Rate Limiters, Logs)"]
+        Controllers["Controllers (Request/Response Handlers)"]
+        Services["Services (Business Logic & Aggregations)"]
+        Mongoose["Mongoose Models (Game, User Schema)"]
+    end
+
+    subgraph Storage ["Data Store"]
+        MongoDB[("MongoDB Atlas Database")]
+    end
+
+    subgraph Operations ["Operations & Data Setup"]
+        Scripts["Scripts (seed, migrate, updateRatings)"]
+    end
+
+    Browser <--> React
+    React <--> Redux
+    Redux <--> Axios
+    Axios <-->|HTTP Calls / JSON Payloads| Express
+    Express --> Middlewares
+    Middlewares --> Controllers
+    Controllers --> Services
+    Services --> Mongoose
+    Mongoose <--> MongoDB
+    Scripts -->|Write / Update / Schema Sync| MongoDB
+```
+
 ---
 
 ## 🛠️ Technology Stack
